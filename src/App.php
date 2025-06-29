@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Request;
 use App\Router\Router;
 
 class App
@@ -9,9 +10,9 @@ class App
     public function run(): void
     {
         $router = new Router();
+        $request = Request::createFromGlobals();
 
-        $uri = $_SERVER['REQUEST_URI'];
 
-        $router->dispatch($uri);
+        $router->dispatch($request->uri(), $request->method());
     }
 }
